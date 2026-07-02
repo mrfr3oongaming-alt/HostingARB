@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تذاكر الدعم - arbHostingCraft</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-[#0a0a0a]">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center" onclick="window.location.href='../index.html'">
+                    <svg viewBox="0 0 100 100" class="w-10 h-10 ml-3 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="100%" stop-color="#F97316" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 5 L90 20 L90 50 C90 75 50 95 50 95 C50 95 10 75 10 50 L10 20 Z" fill="none" stroke="url(#goldGrad)" stroke-width="6"/>
+                        <path d="M50 15 L80 27 L80 50 C80 68 50 83 50 83 C50 83 20 68 20 50 L20 27 Z" fill="url(#goldGrad)"/>
+                        <rect x="42" y="35" width="16" height="16" fill="#0a0a0a" rx="2"/>
+                    </svg>
+                    <span class="font-bold text-2xl tracking-wide">arb<span class="text-gradient">Hosting</span>Craft</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-4 space-x-reverse">
+                    <a href="../index.html" class="text-zinc-300 hover:text-white font-medium text-sm transition">الرئيسية</a>
+                    <a href="dashboard.html" class="text-zinc-300 hover:text-white font-medium text-sm transition">لوحة التحكم</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tickets Content -->
+    <section class="pt-32 pb-20 bg-brand-black min-h-screen">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <a href="dashboard.html" class="text-zinc-400 hover:text-brand-gold text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-right"></i> عودة للوحة التحكم
+                    </a>
+                    <h2 class="text-3xl font-bold">تذاكر <span class="text-gradient">الدعم الفني</span></h2>
+                </div>
+                <button onclick="alert('فتح تذكرة جديدة... قم بكتابة تفاصيل مشكلتك وسيجيب الدعم فوراً')" class="px-5 py-2 btn-brand rounded-lg text-black font-bold">
+                    <i class="fa-solid fa-plus ml-2"></i> تذكرة جديدة
+                </button>
+            </div>
+            
+            <div class="glass-card rounded-xl overflow-hidden">
+                <table class="w-full text-right text-sm">
+                    <thead class="bg-zinc-900/80 text-zinc-400">
+                        <tr>
+                            <th class="px-6 py-4 font-medium">رقم التذكرة</th>
+                            <th class="px-6 py-4 font-medium">الموضوع</th>
+                            <th class="px-6 py-4 font-medium">الحالة</th>
+                            <th class="px-6 py-4 font-medium">آخر تحديث</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-800">
+                        <tr class="hover:bg-zinc-800/30 transition cursor-pointer">
+                            <td class="px-6 py-4 font-mono">#1042</td>
+                            <td class="px-6 py-4 font-medium text-white">مشكلة في تركيب مود Fabric</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-green-900/50 text-green-400 rounded text-xs border border-green-800">تمت الإجابة</span></td>
+                            <td class="px-6 py-4 text-zinc-400">منذ ساعتين</td>
+                        </tr>
+                        <tr class="hover:bg-zinc-800/30 transition cursor-pointer">
+                            <td class="px-6 py-4 font-mono">#0891</td>
+                            <td class="px-6 py-4 font-medium text-white">استفسار بخصوص طريقة الترقية من 2G إلى 8G</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-zinc-800 text-zinc-300 rounded text-xs border border-zinc-700">مغلقة</span></td>
+                            <td class="px-6 py-4 text-zinc-400">منذ 3 أيام</td>
+                        </tr>
+                        <tr class="hover:bg-zinc-800/30 transition cursor-pointer">
+                            <td class="px-6 py-4 font-mono">#0765</td>
+                            <td class="px-6 py-4 font-medium text-white">طلب تثبيت إضافة WorldEdit</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-900/50 text-yellow-400 rounded text-xs border border-yellow-800">قيد المعالجة</span></td>
+                            <td class="px-6 py-4 text-zinc-400">منذ 5 ساعات</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

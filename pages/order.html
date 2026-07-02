@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب سيرفر جديد - arbHostingCraft</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-[#0a0a0a]">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center" onclick="window.location.href='../index.html'">
+                    <svg viewBox="0 0 100 100" class="w-10 h-10 ml-3 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="100%" stop-color="#F97316" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 5 L90 20 L90 50 C90 75 50 95 50 95 C50 95 10 75 10 50 L10 20 Z" fill="none" stroke="url(#goldGrad)" stroke-width="6"/>
+                        <path d="M50 15 L80 27 L80 50 C80 68 50 83 50 83 C50 83 20 68 20 50 L20 27 Z" fill="url(#goldGrad)"/>
+                        <rect x="42" y="35" width="16" height="16" fill="#0a0a0a" rx="2"/>
+                    </svg>
+                    <span class="font-bold text-2xl tracking-wide">arb<span class="text-gradient">Hosting</span>Craft</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-4 space-x-reverse">
+                    <a href="../index.html" class="text-zinc-300 hover:text-white font-medium text-sm transition">الرئيسية</a>
+                    <a href="dashboard.html" class="text-zinc-300 hover:text-white font-medium text-sm transition">لوحة التحكم</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Order Form -->
+    <section class="pt-32 pb-20 bg-brand-black min-h-screen">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="mb-8">
+                <a href="../index.html" class="text-zinc-400 hover:text-brand-gold text-sm mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-right"></i> عودة للرئيسية
+                </a>
+                <h2 class="text-3xl font-bold">إتمام <span class="text-gradient">الطلب</span> والاشتراك</h2>
+                <p class="text-zinc-400 mt-2">اختر الخطة وقم بضبط إعدادات السيرفر الجديد لبدء التجهيز الفوري.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 space-y-6">
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">1. اختر الخطة المناسبة</h3>
+                        <select id="order-plan-select" onchange="updateOrderPrice()" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white">
+                            <option value="0" selected>الخطة المجانية - 2GB RAM ($0 للأبد)</option>
+                            <option value="8">الأساسية - 4GB RAM ($8 شهرياً)</option>
+                            <option value="11">المتوسطة - 6GB RAM ($11 شهرياً)</option>
+                            <option value="15">المتقدمة - 8GB RAM ($15 شهرياً)</option>
+                            <option value="22">الممتازة - 12GB RAM ($22 شهرياً)</option>
+                            <option value="28">الاحترافية - 16GB RAM ($28 شهرياً)</option>
+                            <option value="40">القصوى - 24GB RAM ($40 شهرياً)</option>
+                        </select>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">2. دورة الفوترة</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="billing" class="peer sr-only" checked>
+                                <div class="p-4 border border-zinc-700 rounded-lg text-center peer-checked:border-brand-orange peer-checked:bg-brand-orange/10 transition">
+                                    <div class="font-bold text-lg">شهري (عادي)</div>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="billing" class="peer sr-only">
+                                <div class="p-4 border border-zinc-700 rounded-lg text-center peer-checked:border-brand-orange peer-checked:bg-brand-orange/10 transition relative">
+                                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black text-xs font-bold px-2 py-1 rounded">خصم 15%</div>
+                                    <div class="font-bold text-lg">سنوي (توفير كبير)</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">3. اسم السيرفر</h3>
+                        <input type="text" id="order-server-name" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white" placeholder="مثال: My Awesome Server">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="glass-card p-6 rounded-xl sticky top-28">
+                        <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">ملخص الحساب</h3>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-zinc-400" id="summary-plan-name">سيرفر ماين كرافت (المجاني)</span>
+                                <span id="summary-base-price">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-zinc-400">تجهيز آلي وسيرفر نشط</span>
+                                <span class="text-green-400">مجاناً</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-zinc-800 pt-4 mb-6">
+                            <div class="flex justify-between font-bold text-lg">
+                                <span>المجموع المستحق دفعاً</span>
+                                <span class="text-brand-gold" id="summary-total-price">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <button onclick="processOrderCheckout()" class="w-full py-3 rounded-lg btn-brand text-black font-bold text-lg">
+                            تأكيد وبدء التفعيل
+                        </button>
+                        <p class="text-xs text-zinc-500 text-center mt-3">بالضغط على الزر، فإنك توافق التزاماً بشروط وسياسة الخصوصية الخاصة بنا.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function updateOrderPrice() {
+            const planSelect = document.getElementById('order-plan-select');
+            const price = parseInt(planSelect.value);
+            const planName = planSelect.options[planSelect.selectedIndex].text.split(' - ')[0];
+            
+            document.getElementById('summary-plan-name').innerText = "خطة ماين كرافت (" + planName + ")";
+            document.getElementById('summary-base-price').innerText = "$" + price + ".00";
+            document.getElementById('summary-total-price').innerText = "$" + price + ".00";
+        }
+
+        function processOrderCheckout() {
+            const planSelect = document.getElementById('order-plan-select');
+            const price = parseInt(planSelect.value);
+            
+            if (price === 0) {
+                alert('تم تفعيل خطتك التجريبية المجانية بنجاح! جاري إعداد وتجهيز السيرفر...');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('تم توجيهك الآن آلياً لبوابة استقبال المدفوعات الآمنة...');
+            }
+        }
+    </script>
+</body>
+</html>

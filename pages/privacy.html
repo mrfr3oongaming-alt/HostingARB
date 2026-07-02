@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية - arbHostingCraft</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-[#0a0a0a]">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center" onclick="window.location.href='../index.html'">
+                    <svg viewBox="0 0 100 100" class="w-10 h-10 ml-3 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="100%" stop-color="#F97316" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 5 L90 20 L90 50 C90 75 50 95 50 95 C50 95 10 75 10 50 L10 20 Z" fill="none" stroke="url(#goldGrad)" stroke-width="6"/>
+                        <path d="M50 15 L80 27 L80 50 C80 68 50 83 50 83 C50 83 20 68 20 50 L20 27 Z" fill="url(#goldGrad)"/>
+                        <rect x="42" y="35" width="16" height="16" fill="#0a0a0a" rx="2"/>
+                    </svg>
+                    <span class="font-bold text-2xl tracking-wide">arb<span class="text-gradient">Hosting</span>Craft</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-4 space-x-reverse">
+                    <a href="../index.html" class="text-zinc-300 hover:text-white font-medium text-sm transition">الرئيسية</a>
+                    <a href="dashboard.html" class="text-zinc-300 hover:text-white font-medium text-sm transition">لوحة التحكم</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Privacy Policy Content -->
+    <section class="pt-32 pb-20 bg-brand-black min-h-screen">
+        <div class="max-w-4xl mx-auto px-4 glass-card p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold mb-6 text-gradient">سياسة الخصوصية (Privacy Policy)</h2>
+            <div class="prose prose-invert max-w-none text-zinc-300 space-y-4">
+                <p>آخر تحديث: 2026</p>
+                
+                <h3 class="text-xl font-bold text-white mt-6">1. جمع واستخدام البيانات الشخصية</h3>
+                <p>نقوم بجمع الحد الأدنى من البيانات كالبريد الإلكتروني والاسم لتسجيل الحساب وإدارة خوادمك وأمان الاتصال وحمايتها. لن نشارك بياناتك مع أي طرف ثالث دون موافقتك الصريحة.</p>
+                
+                <h3 class="text-xl font-bold text-white mt-6">2. البيانات التي نجمعها</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>البريد الإلكتروني واسم المستخدم</li>
+                    <li>عنوان IP الخاص بك (لأغراض أمنية)</li>
+                    <li>بيانات السيرفرات التي تديرها</li>
+                    <li>سجل النشاط داخل لوحة التحكم</li>
+                </ul>
+                
+                <h3 class="text-xl font-bold text-white mt-6">3. استخدام الكوكيز (Cookies)</h3>
+                <p>نستخدم الكوكيز لتذكر تفضيلاتك وتحسين تجربة التصفح. يمكنك تعطيل الكوكيز من إعدادات المتصفح الخاص بك.</p>
+                
+                <h3 class="text-xl font-bold text-white mt-6">4. حماية البيانات</h3>
+                <p>نطبق أعلى معايير الأمان لحماية بياناتك بما في ذلك التشفير وجدران الحماية وأنظمة كشف الاختراق.</p>
+                
+                <h3 class="text-xl font-bold text-white mt-6">5. حقوق المستخدم</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>يمكنك طلب حذف حسابك في أي وقت</li>
+                    <li>يمكنك تصحيح بياناتك الشخصية</li>
+                    <li>يمكنك تصدير بياناتك بصيغة JSON</li>
+                </ul>
+                
+                <h3 class="text-xl font-bold text-white mt-6">6. التواصل معنا</h3>
+                <p>لأي استفسار بخصوص الخصوصية، يمكنك التواصل معنا على: <span class="text-brand-orange">support@arbhostingcraft.com</span></p>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

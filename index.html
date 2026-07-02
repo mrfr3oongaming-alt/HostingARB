@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arbHostingCraft | استضافة ماين كرافت الاحترافية</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- ربط ملف CSS الخاص بنا -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="flex flex-col items-center">
+            <div class="cube mb-6"></div>
+            <h2 class="text-2xl font-bold text-gradient tracking-widest">arbHostingCraft</h2>
+            <p class="text-zinc-500 text-sm mt-2">جاري تجهيز الموارد ولوحة التحكم...</p>
+        </div>
+    </div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="switchView('view-home')">
+                    <svg viewBox="0 0 100 100" class="w-10 h-10 ml-3 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD700" />
+                                <stop offset="100%" stop-color="#F97316" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 5 L90 20 L90 50 C90 75 50 95 50 95 C50 95 10 75 10 50 L10 20 Z" fill="none" stroke="url(#goldGrad)" stroke-width="6"/>
+                        <path d="M50 15 L80 27 L80 50 C80 68 50 83 50 83 C50 83 20 68 20 50 L20 27 Z" fill="url(#goldGrad)"/>
+                        <rect x="42" y="35" width="16" height="16" fill="#0a0a0a" rx="2"/>
+                    </svg>
+                    <span class="font-bold text-2xl tracking-wide">arb<span class="text-gradient">Hosting</span>Craft</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6 space-x-reverse">
+                        <a href="#" onclick="switchView('view-home')" class="hover:text-brand-gold px-3 py-2 rounded-md text-sm font-medium transition">الرئيسية</a>
+                        <a href="#plans" onclick="switchView('view-home'); setTimeout(()=>document.getElementById('plans').scrollIntoView(), 100);" class="hover:text-brand-gold px-3 py-2 rounded-md text-sm font-medium transition">الخطط والأسعار</a>
+                        <a href="#features" onclick="switchView('view-home'); setTimeout(()=>document.getElementById('features').scrollIntoView(), 100);" class="hover:text-brand-gold px-3 py-2 rounded-md text-sm font-medium transition">المميزات</a>
+                        <a href="#" onclick="switchView('view-kb')" class="hover:text-brand-gold px-3 py-2 rounded-md text-sm font-medium transition">قاعدة المعرفة</a>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center space-x-4 space-x-reverse">
+                    <button onclick="switchView('view-login')" class="text-zinc-300 hover:text-white font-medium text-sm transition">تسجيل الدخول</button>
+                    <button onclick="switchView('view-dashboard')" class="btn-brand px-6 py-2 rounded-lg text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad animate-pulse"></i> لوحة التحكم
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden glass border-t border-zinc-800 absolute w-full" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" onclick="switchView('view-home'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-zinc-800 hover:text-brand-gold">الرئيسية</a>
+                <a href="#plans" onclick="switchView('view-home'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-zinc-800 hover:text-brand-gold">الخطط</a>
+                <a href="#" onclick="switchView('view-kb'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-zinc-800 hover:text-brand-gold">قاعدة المعرفة</a>
+                <a href="#" onclick="switchView('view-login'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-brand-orange">تسجيل الدخول</a>
+                <a href="#" onclick="switchView('view-dashboard'); toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-brand-gold">لوحة التحكم</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="app-container">
+        
+        <!-- HOME VIEW -->
+        <div id="view-home" class="page-view active">
+            <!-- Hero Section -->
+            <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-screen flex items-center">
+                <div class="absolute inset-0 hero-bg z-0"></div>
+                <div class="absolute inset-0 hero-overlay z-0"></div>
+                
+                <div class="absolute top-1/4 right-10 w-32 h-32 bg-brand-orange rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-glow"></div>
+                <div class="absolute bottom-1/4 left-10 w-48 h-48 bg-brand-gold rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-glow" style="animation-delay: 1s;"></div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="text-center max-w-4xl mx-auto">
+                        <span class="inline-block py-1 px-3 rounded-full glass border border-brand-orange/30 text-brand-gold text-sm font-semibold mb-6">
+                            <i class="fa-solid fa-bolt mr-2"></i> الجيل الجديد من استضافات الألعاب بلوحة تحكم كاملة
+                        </span>
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-tight">
+                            أطلق العنان لسيرفرك مع <br>
+                            <span class="text-gradient">قوة المعالجة الفائقة</span> <br>
+                            من arbHostingCraft
+                        </h1>
+                        <p class="mt-4 text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                            أداء لا مثيل له، حماية متقدمة ضد هجمات DDoS، لوحة تحكم سحابية لإدارة سيرفراتك بالكامل، ودعم فني على مدار الساعة لضمان أفضل تجربة لعب.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <button onclick="document.getElementById('plans').scrollIntoView()" class="btn-brand px-8 py-4 rounded-xl text-lg flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-rocket animate-bounce"></i> تصفح الخطط والأسعار
+                            </button>
+                            <button onclick="document.getElementById('features').scrollIntoView()" class="px-8 py-4 rounded-xl text-lg font-bold border-2 border-zinc-700 hover:border-brand-gold hover:text-brand-gold transition duration-300 flex items-center justify-center gap-3 bg-zinc-900/50 backdrop-blur">
+                                اكتشف المميزات الفريدة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics -->
+            <section class="py-12 border-y border-zinc-800/50 glass relative z-20 -mt-10 mx-4 lg:mx-auto max-w-6xl rounded-2xl">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center px-4">
+                    <div>
+                        <div class="text-3xl md:text-5xl font-black text-brand-gold mb-2">99.9%</div>
+                        <div class="text-zinc-400 font-medium">وقت التشغيل المستمر (Uptime)</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-5xl font-black text-brand-gold mb-2">+12,500</div>
+                        <div class="text-zinc-400 font-medium">سيرفر تم إنشاؤه</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-5xl font-black text-brand-gold mb-2"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div class="text-zinc-400 font-medium">تجهيز آلي فوري</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-5xl font-black text-brand-gold mb-2">24/7</div>
+                        <div class="text-zinc-400 font-medium">دعم فني وتواصل مباشر</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plans Section -->
+            <section id="plans" class="py-24 bg-zinc-900 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4">اختر الخطة <span class="text-gradient">المناسبة</span> لسيرفرك</h2>
+                        <p class="text-zinc-400 max-w-2xl mx-auto text-lg">نقدم خططاً مرنة ومفتوحة الموارد تبدأ من مجانية تماماً لتجربة خدماتنا.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        
+                        <!-- Plan Free 2GB -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative border-brand-orange/30 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
+                            <div class="absolute top-0 right-0 bg-zinc-800 text-brand-gold text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl">تفعيل مجاني</div>
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">الخطة المجانية</h3>
+                                <div class="text-brand-orange font-bold text-lg">2GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$0</span>
+                                <span class="text-zinc-500">/ للأبد</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> سعة عشوائية 2 جيجابايت</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة تخزين 10GB NVMe</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> 1 معالج افتراضي vCPU</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> لوحة تحكم تفاعلية متكاملة</li>
+                                <li><i class="fa-solid fa-xmark text-red-500 ml-2"></i> دعم فني محدود</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white transition-all font-bold">ابدأ مجاناً الآن</button>
+                        </div>
+
+                        <!-- Plan 4GB -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative">
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">الأساسية</h3>
+                                <div class="text-brand-orange font-bold text-lg">4GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$8</span>
+                                <span class="text-zinc-500">/ شهرياً</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> لا حدود لعدد اللاعبين</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة تخزين 40GB NVMe</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> 2 معالج افتراضي vCPU</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> قواعد بيانات MySQL سريعة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> لوحة تحكم Pterodactyl المحدثة</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white transition-all font-bold">اطلب الآن</button>
+                        </div>
+
+                        <!-- Plan 6GB -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative">
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">المتوسطة</h3>
+                                <div class="text-brand-orange font-bold text-lg">6GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$11</span>
+                                <span class="text-zinc-500">/ شهرياً</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مناسبة لسيرفرات البقاء والـ Mods</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة تخزين 60GB NVMe</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> 3 معالج افتراضي vCPU</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> حماية هجمات DDoS معززة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> نسخ احتياطي تلقائي مجدول</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white transition-all font-bold">اطلب الآن</button>
+                        </div>
+
+                        <!-- Plan 8GB (Popular) -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative transform md:-translate-y-4 border-brand-gold shadow-[0_0_20px_rgba(255,215,0,0.15)]">
+                            <div class="absolute top-0 right-0 bg-gradient-brand text-black text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl">الأكثر طلباً</div>
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">المتقدمة</h3>
+                                <div class="text-brand-gold font-bold text-lg">8GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$15</span>
+                                <span class="text-zinc-500">/ شهرياً</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> لا حدود لعدد اللاعبين</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة NVMe مفتوحة وغير محدودة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> 4 معالجات افتراضية vCPU</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> أولوية في الدعم الفني المباشر</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> خادم ديسكورد وربط بوت مخصص</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg btn-brand font-bold text-black shadow-lg shadow-brand-orange/30">اطلب الآن</button>
+                        </div>
+
+                        <!-- Plan 12GB -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative">
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">الممتازة</h3>
+                                <div class="text-brand-orange font-bold text-lg">12GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$22</span>
+                                <span class="text-zinc-500">/ شهرياً</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> لألعاب البانجي كورد والشبكات الكبيرة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة 120GB NVMe SSD</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> 6 معالجات افتراضية vCPU</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> قواعد بيانات MySQL غير محدودة</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white transition-all font-bold">اطلب الآن</button>
+                        </div>
+
+                        <!-- Plan 16GB -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative">
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">الاحترافية</h3>
+                                <div class="text-brand-orange font-bold text-lg">16GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$28</span>
+                                <span class="text-zinc-500">/ شهرياً</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مناسب للشبكات وتجميعات المودات الضخمة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة NVMe غير محدودة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> معالجات Ryzen 9 مخصصة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> إمكانية التخصيص الكامل للجافا</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white transition-all font-bold">اطلب الآن</button>
+                        </div>
+
+                        <!-- Plan 24GB -->
+                        <div class="glass-card rounded-2xl p-6 flex flex-col relative">
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-1">القصوى</h3>
+                                <div class="text-brand-orange font-bold text-lg">24GB RAM</div>
+                            </div>
+                            <div class="mb-6">
+                                <span class="text-4xl font-extrabold">$40</span>
+                                <span class="text-zinc-500">/ شهرياً</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-zinc-300 mb-8 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> الأداء الأقصى للشبكات الضخمة</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> مساحة تخزين NVMe حصرية بالكامل</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> إدارة الخادم بواسطة مهندسينا (Managed)</li>
+                                <li><i class="fa-solid fa-check text-brand-gold ml-2"></i> عنوان IP مخصص مجاني (Dedicated IP)</li>
+                            </ul>
+                            <button onclick="switchView('view-order')" class="w-full py-3 rounded-lg border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white transition-all font-bold">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="py-24 bg-brand-black relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4">أهم مميزات استضافة <span class="text-gradient">arbHostingCraft</span></h2>
+                        <p class="text-zinc-400 max-w-2xl mx-auto text-lg">نوفر بنية تحتية برمجية وعتادية متكاملة لنضمن تفوق خادمك واستقراره الدائم.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="glass-card p-8 rounded-2xl group relative overflow-hidden">
+                            <div class="w-14 h-14 bg-zinc-800 rounded-xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:border-brand-gold transition-colors">
+                                <i class="fa-solid fa-microchip text-2xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">معالجات Ryzen الفائقة</h3>
+                            <p class="text-zinc-400 leading-relaxed">نستخدم معالجات AMD Ryzen الحديثة بترددات فائقة لضمان معالجة خالية تماماً من الـ Chunks lag.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl group relative overflow-hidden">
+                            <div class="w-14 h-14 bg-zinc-800 rounded-xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:border-brand-gold transition-colors">
+                                <i class="fa-solid fa-hard-drive text-2xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">تخزين فائقة السرعة NVMe SSD</h3>
+                            <p class="text-zinc-400 leading-relaxed">سرعة كتابة وقراءة جنونية لملفات سيرفرك وتوليد العوالم بشكل سريع وغير مسبوق.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl group relative overflow-hidden">
+                            <div class="w-14 h-14 bg-zinc-800 rounded-xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:border-brand-gold transition-colors">
+                                <i class="fa-solid fa-shield-halved text-2xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">حماية متطورة Anti-DDoS</h3>
+                            <p class="text-zinc-400 leading-relaxed">تصفية وحماية استباقية ضد جميع أنواع الهجمات السيبرانية لضمان استقرار الخادم دائماً.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl group relative overflow-hidden">
+                            <div class="w-14 h-14 bg-zinc-800 rounded-xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:border-brand-gold transition-colors">
+                                <i class="fa-solid fa-terminal text-2xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">لوحة تحكم تفاعلية متكاملة</h3>
+                            <p class="text-zinc-400 leading-relaxed">تضم لوحة تحكم السيرفر متصفح للملفات، منفذ للأوامر (Console) تفاعلي، ومثبت لإضافات وبلوقنز السيرفر.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl group relative overflow-hidden">
+                            <div class="w-14 h-14 bg-zinc-800 rounded-xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:border-brand-gold transition-colors">
+                                <i class="fa-solid fa-cloud-arrow-up text-2xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">نسخ احتياطي مجدول</h3>
+                            <p class="text-zinc-400 leading-relaxed">نظام نسخ احتياطي دوري ومجاني يحمي عوالمك وملفاتك وسيرفراتك من الضياع والتلف.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl group relative overflow-hidden">
+                            <div class="w-14 h-14 bg-zinc-800 rounded-xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:border-brand-gold transition-colors">
+                                <i class="fa-solid fa-headset text-2xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">دعم فني متواصل 24/7</h3>
+                            <p class="text-zinc-400 leading-relaxed">فريق فني عربي خبير لمساعدتك في بناء سيرفرك، وتثبيت الإضافات وحل جميع المشاكل التقنية.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="py-20 bg-zinc-950">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-12">ماذا يقول <span class="text-gradient">عملاؤنا</span></h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-card p-6 rounded-xl">
+                            <div class="flex text-brand-gold mb-3 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-zinc-300 italic mb-4">"البنق منخفض وممتاز جداً لمجتمع اللاعبين في الشرق الأوسط والدول العربية. السيرفر مستقر وبدون أي لاق يذكر."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-zinc-700 rounded-full flex items-center justify-center font-bold text-xl text-brand-gold">M</div>
+                                <div>
+                                    <h4 class="font-bold">محمد ا.</h4>
+                                    <span class="text-xs text-zinc-500">منشئ سيرفر بقاء عربي</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl">
+                            <div class="flex text-brand-gold mb-3 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-zinc-300 italic mb-4">"أعجبتني لوحة التحكم المتكاملة بالموقع جداً، تمكنت من رفع عالمي المخصص وإدارة السيرفر وتشغيله من المتصفح مباشرة!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-zinc-700 rounded-full flex items-center justify-center font-bold text-xl text-brand-gold">S</div>
+                                <div>
+                                    <h4 class="font-bold">سلمان ع.</h4>
+                                    <span class="text-xs text-zinc-500">مالك شبكة ألعاب</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl">
+                            <div class="flex text-brand-gold mb-3 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-zinc-300 italic mb-4">"الدعم الفني لديهم سريع ومحترف جداً. ساعدوني في تثبيت جافا وتعديل ملفات التكوين وحل الأخطاء بثوانٍ."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-zinc-700 rounded-full flex items-center justify-center font-bold text-xl text-brand-gold">K</div>
+                                <div>
+                                    <h4 class="font-bold">خالد ي.</h4>
+                                    <span class="text-xs text-zinc-500">يوتيوبر وصانع محتوى</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="py-20 bg-zinc-900 border-t border-zinc-800">
+                <div class="max-w-4xl mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-12">الأسئلة <span class="text-gradient">الشائعة</span></h2>
+                    
+                    <div class="space-y-4">
+                        <div class="glass-card rounded-xl overflow-hidden">
+                            <button onclick="toggleFaq(1)" class="w-full px-6 py-4 flex justify-between items-center text-right focus:outline-none">
+                                <span class="font-bold text-lg">كيف يمكنني تفعيل الخطة المجانية؟</span>
+                                <i id="faq-icon-1" class="fa-solid fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                            </button>
+                            <div id="faq-content-1" class="hidden px-6 pb-4 text-zinc-400">
+                                يمكنك تفعيل الخطة المجانية 2GB RAM بضغطة زر وبدون الحاجة لبطاقة ائتمان. فقط اختر الخطة المجانية من لوحة التحكم أو صفحة الطلب، وسيتم تجهيز السيرفر لك فوراً لتجربة الاستضافة.
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card rounded-xl overflow-hidden">
+                            <button onclick="toggleFaq(2)" class="w-full px-6 py-4 flex justify-between items-center text-right focus:outline-none">
+                                <span class="font-bold text-lg">كيف يمكنني رفع عوالمي وملفاتي وموقعي الخاص؟</span>
+                                <i id="faq-icon-2" class="fa-solid fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                            </button>
+                            <div id="faq-content-2" class="hidden px-6 pb-4 text-zinc-400">
+                                يمكنك استخدام "مدير الملفات" (File Manager) المدمج في لوحة التحكم السحابية لدينا لرفع الملفات، أو يمكنك الاتصال بخادمك بأمان عبر بروتوكول SFTP باستخدام برامج مثل FileZilla ورفع كافة عوالمك ومواقعك مباشرة.
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl overflow-hidden">
+                            <button onclick="toggleFaq(3)" class="w-full px-6 py-4 flex justify-between items-center text-right focus:outline-none">
+                                <span class="font-bold text-lg">كيف يتم استلام وسحب الأرباح والمدفوعات المحولة؟</span>
+                                <i id="faq-icon-3" class="fa-solid fa-chevron-down text-brand-gold transition-transform duration-300"></i>
+                            </button>
+                            <div id="faq-content-3" class="hidden px-6 pb-4 text-zinc-400">
+                                نوفر لك لوحة إدارة مبيعات متطورة وربطاً تزامناً مع بوابات الدفع الشهيرة مثل PayPal، وبطاقات الائتمان (Visa/Mastercard)، وبوابات الدفع المحلية مثل فودافون كاش، STC Pay، وInstaPay. لتفاصيل الربط وكيفية استقبال أموالك وسحبها، يرجى قراءة دليل المدفوعات في قاعدة المعرفة المدمجة بالموقع.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- END HOME VIEW -->
+
+        <!-- ========== OTHER VIEWS (Links to pages) ========== -->
+        <div id="view-login" class="page-view min-h-screen pt-24 pb-12 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1607513746994-4903df1904d4?q=80&w=2000&auto=format&fit=crop')] bg-cover relative">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
+            <div class="glass-card p-8 rounded-2xl w-full max-w-md relative z-10">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">تسجيل الدخول</h2>
+                    <p class="text-zinc-400 text-sm">أهلاً بك مجدداً، أدخل بياناتك للوصول إلى لوحة التحكم</p>
+                </div>
+                <form onsubmit="event.preventDefault(); switchView('view-dashboard');" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-300 mb-1">البريد الإلكتروني</label>
+                        <input type="email" required class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white" placeholder="yourname@domain.com">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <label class="block text-sm font-medium text-zinc-300">كلمة المرور</label>
+                            <a href="#" class="text-xs text-brand-gold hover:underline">نسيت كلمة المرور؟</a>
+                        </div>
+                        <input type="password" required class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white" placeholder="••••••••">
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" class="w-4 h-4 rounded border-zinc-700 text-brand-orange focus:ring-brand-orange bg-zinc-900">
+                        <label for="remember" class="ml-2 mr-2 block text-sm text-zinc-400">تذكر تسجيل دخولي</label>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-lg btn-brand text-black font-bold text-lg mt-4">تسجيل الدخول</button>
+                </form>
+                <div class="mt-6 text-center text-sm text-zinc-400">
+                    ليس لديك حساب حالي؟ <a href="#" onclick="switchView('view-register')" class="text-brand-orange font-bold hover:underline">إنشاء حساب جديد مجاناً</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-register" class="page-view min-h-screen pt-24 pb-12 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1607513746994-4903df1904d4?q=80&w=2000&auto=format&fit=crop')] bg-cover relative">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
+            <div class="glass-card p-8 rounded-2xl w-full max-w-lg relative z-10">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">إنشاء حساب استضافة</h2>
+                    <p class="text-zinc-400 text-sm">سجل حسابك مجاناً لتبدأ بإعداد سيرفراتك وإدارتها</p>
+                </div>
+                <form onsubmit="event.preventDefault(); showMessage('تم تسجيل الحساب بنجاح! جاري التوجيه للوحة التحكم...'); setTimeout(()=>switchView('view-dashboard'), 1500);" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-zinc-300 mb-1">الاسم الأول</label>
+                            <input type="text" required class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-zinc-300 mb-1">الاسم الأخير</label>
+                            <input type="text" required class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-300 mb-1">البريد الإلكتروني</label>
+                        <input type="email" required class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-300 mb-1">كلمة المرور</label>
+                        <input type="password" required class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white" placeholder="أدخل كلمة مرور قوية">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-lg btn-brand text-black font-bold text-lg mt-6">إنشاء الحساب وبدء التجربة</button>
+                </form>
+                <div class="mt-6 text-center text-sm text-zinc-400">
+                    لديك حساب بالفعل؟ <a href="#" onclick="switchView('view-login')" class="text-brand-orange font-bold hover:underline">تسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-dashboard" class="page-view min-h-screen pt-20 bg-brand-black">
+            <div class="flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-80px)]">
+                <aside class="w-full lg:w-64 glass border-l border-zinc-800 p-4 overflow-y-auto">
+                    <div class="mb-8 px-4 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-zinc-500">أهلاً بك، العميل</p>
+                            <h3 class="font-bold text-md text-brand-gold">أحمد محمد</h3>
+                        </div>
+                        <span class="px-2 py-1 bg-green-500/10 text-green-400 border border-green-500/20 text-xs rounded-full">متصل</span>
+                    </div>
+                    <nav class="space-y-2">
+                        <a href="#" onclick="showDashboardSection('dashboard-servers')" class="block px-4 py-3 rounded-lg bg-zinc-800/50 text-brand-orange border-r-2 border-brand-orange font-medium">
+                            <i class="fa-solid fa-server ml-2 w-5 text-center"></i> سيرفراتي النشطة
+                        </a>
+                        <a href="#" onclick="switchView('view-order')" class="block px-4 py-3 rounded-lg hover:bg-zinc-800/50 text-zinc-300 hover:text-white transition font-medium">
+                            <i class="fa-solid fa-cart-plus ml-2 w-5 text-center"></i> حجز سيرفر جديد
+                        </a>
+                        <a href="#" onclick="switchView('view-tickets')" class="block px-4 py-3 rounded-lg hover:bg-zinc-800/50 text-zinc-300 hover:text-white transition font-medium">
+                            <i class="fa-solid fa-ticket ml-2 w-5 text-center"></i> تذاكر الدعم الفني
+                        </a>
+                        <a href="#" onclick="switchView('view-kb')" class="block px-4 py-3 rounded-lg hover:bg-zinc-800/50 text-zinc-300 hover:text-white transition font-medium">
+                            <i class="fa-solid fa-book-open ml-2 w-5 text-center"></i> شروحات ومقالات
+                        </a>
+                        <div class="pt-4 mt-4 border-t border-zinc-800">
+                            <a href="#" onclick="switchView('view-home')" class="block px-4 py-3 rounded-lg hover:bg-red-900/30 text-red-400 transition font-medium">
+                                <i class="fa-solid fa-right-from-bracket ml-2 w-5 text-center"></i> تسجيل الخروج
+                            </a>
+                        </div>
+                    </nav>
+                </aside>
+                
+                <main class="flex-1 p-6 lg:p-10 overflow-y-auto bg-zinc-950">
+                    <div id="dashboard-servers" class="dashboard-subview">
+                        <div class="flex justify-between items-center mb-8">
+                            <div>
+                                <h2 class="text-2xl font-bold">إدارة سيرفرات ماين كرافت الخاصة بك</h2>
+                                <p class="text-zinc-400 text-sm mt-1">عرض حالة السيرفرات الحالية والوصول المباشر للوحة التحكم التفاعلية.</p>
+                            </div>
+                            <button onclick="switchView('view-order')" class="px-4 py-2 bg-brand-orange hover:bg-brand-orange/80 rounded-lg text-sm transition flex items-center gap-2 font-bold text-black">
+                                <i class="fa-solid fa-plus"></i> سيرفر جديد
+                            </button>
+                        </div>
+                        
+                        <div class="glass-card p-6 rounded-xl border border-zinc-700 hover:border-brand-gold transition flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-zinc-900 rounded-lg flex items-center justify-center border border-zinc-800 relative">
+                                    <i class="fa-solid fa-cubes text-2xl text-brand-gold"></i>
+                                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-zinc-900 animate-pulse"></div>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">سيرفر التجربة المجاني (Survival SMP)</h3>
+                                    <div class="text-sm text-zinc-400 font-mono mt-1">IP: play.arbhostingcraft.free</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-8 text-sm">
+                                <div class="text-center">
+                                    <div class="text-zinc-500 mb-1">الخطة</div>
+                                    <div class="font-bold text-brand-orange">مجانية (2GB)</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-zinc-500 mb-1">الانتهاء</div>
+                                    <div class="font-bold text-zinc-300">مفتوح للأبد</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-zinc-500 mb-1">الحالة</div>
+                                    <div id="card-status-label" class="font-bold text-green-400">يعمل الآن</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-2 w-full lg:w-auto">
+                                <button onclick="openServerPanel('Survival SMP', 'play.arbhostingcraft.free', '2GB')" class="flex-1 lg:flex-none px-6 py-2 bg-zinc-800 hover:bg-zinc-700 border border-brand-gold text-brand-gold rounded-lg text-sm transition font-bold">
+                                    <i class="fa-solid fa-gauge-high ml-1"></i> لوحة التحكم الكاملة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dashboard-server-panel" class="dashboard-subview hidden">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
+                            <div>
+                                <button onclick="closeServerPanel()" class="text-zinc-500 hover:text-white text-sm mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-arrow-right"></i> العودة لسيرفراتي
+                                </button>
+                                <div class="flex items-center gap-3">
+                                    <h2 class="text-2xl font-bold" id="panel-server-name">Survival SMP</h2>
+                                    <span id="panel-server-status" class="px-2.5 py-0.5 bg-green-900/40 text-green-400 border border-green-800 text-xs rounded-full font-bold">يعمل</span>
+                                </div>
+                                <p class="text-zinc-400 text-sm font-mono mt-1">أدرس الاتصال: <span id="panel-server-ip">play.arbhostingcraft.free</span></p>
+                            </div>
+                            
+                            <div class="flex gap-2 w-full md:w-auto">
+                                <button onclick="controlServerState('start')" id="btn-start" class="flex-1 md:flex-initial px-4 py-2 bg-green-600/20 text-green-400 hover:bg-green-600/30 border border-green-500/30 rounded-lg text-xs font-bold transition">
+                                    <i class="fa-solid fa-play ml-1"></i> تشغيل
+                                </button>
+                                <button onclick="controlServerState('restart')" id="btn-restart" class="flex-1 md:flex-initial px-4 py-2 bg-yellow-600/20 text-yellow-400 hover:bg-yellow-600/30 border border-yellow-500/30 rounded-lg text-xs font-bold transition">
+                                    <i class="fa-solid fa-rotate-left ml-1"></i> إعادة تشغيل
+                                </button>
+                                <button onclick="controlServerState('stop')" id="btn-stop" class="flex-1 md:flex-initial px-4 py-2 bg-red-600/20 text-red-400 hover:bg-red-600/30 border border-red-500/30 rounded-lg text-xs font-bold transition">
+                                    <i class="fa-solid fa-stop ml-1"></i> إيقاف
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="glass-card p-4 rounded-xl">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-zinc-400">استهلاك المعالج (CPU)</span>
+                                    <i class="fa-solid fa-microchip text-brand-gold"></i>
+                                </div>
+                                <div class="flex items-baseline gap-2">
+                                    <span id="cpu-stat-val" class="text-2xl font-black text-white">24.5%</span>
+                                    <span class="text-xs text-zinc-500">من أصل 1 Cores</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2 rounded-full mt-3 overflow-hidden">
+                                    <div id="cpu-stat-bar" class="bg-brand-orange h-full transition-all duration-1000" style="width: 24.5%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-zinc-400">استهلاك الذاكرة العشوائية (RAM)</span>
+                                    <i class="fa-solid fa-memory text-brand-gold"></i>
+                                </div>
+                                <div class="flex items-baseline gap-2">
+                                    <span id="ram-stat-val" class="text-2xl font-black text-white">1.2 GB</span>
+                                    <span class="text-xs text-zinc-500">من أصل 2.0 GB</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2 rounded-full mt-3 overflow-hidden">
+                                    <div id="ram-stat-bar" class="bg-brand-orange h-full transition-all duration-1000" style="width: 60%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-zinc-400">سعة القرص الصلب (NVMe SSD)</span>
+                                    <i class="fa-solid fa-hard-drive text-brand-gold"></i>
+                                </div>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-2xl font-black text-white">3.1 GB</span>
+                                    <span class="text-xs text-zinc-500">من أصل 10.0 GB</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2 rounded-full mt-3 overflow-hidden">
+                                    <div class="bg-brand-orange h-full" style="width: 31%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex border-b border-zinc-800 mb-6 gap-2 overflow-x-auto">
+                            <button onclick="switchPanelTab('panel-tab-console')" id="btn-tab-console" class="px-4 py-2 border-b-2 border-brand-orange text-white font-bold text-sm whitespace-nowrap">
+                                <i class="fa-solid fa-terminal ml-1"></i> موجه الأوامر (Console)
+                            </button>
+                            <button onclick="switchPanelTab('panel-tab-files')" id="btn-tab-files" class="px-4 py-2 text-zinc-400 hover:text-white text-sm whitespace-nowrap">
+                                <i class="fa-solid fa-folder-closed ml-1"></i> مدير الملفات (Files)
+                            </button>
+                            <button onclick="switchPanelTab('panel-tab-plugins')" id="btn-tab-plugins" class="px-4 py-2 text-zinc-400 hover:text-white text-sm whitespace-nowrap">
+                                <i class="fa-solid fa-puzzle-piece ml-1"></i> مثبت الإضافات (Plugins)
+                            </button>
+                        </div>
+
+                        <div id="panel-tab-console" class="panel-tab-content space-y-4">
+                            <div class="bg-black/90 rounded-xl border border-zinc-800 p-4 font-mono text-sm h-72 overflow-y-auto flex flex-col justify-end text-left" dir="ltr" id="console-logs">
+                                <div class="text-zinc-500">[17:01:22 INFO]: Starting minecraft server version 1.20.1</div>
+                                <div class="text-zinc-500">[17:01:23 INFO]: Loading properties</div>
+                                <div class="text-zinc-500">[17:01:24 INFO]: Default game type: SURVIVAL</div>
+                                <div class="text-zinc-500">[17:01:24 INFO]: Generating keypair</div>
+                                <div class="text-green-500">[17:01:25 INFO]: Starting Minecraft server on *:25565</div>
+                                <div class="text-green-500">[17:01:27 INFO]: Preparing level "world"</div>
+                                <div class="text-brand-gold">[17:01:30 INFO]: Done (4.135s)! For help, type "help"</div>
+                                <div class="text-zinc-300">[17:02:10 INFO]: Player 'Ahmad_Gamer' joined the server.</div>
+                            </div>
+                            <form onsubmit="event.preventDefault(); submitConsoleCommand();" class="flex gap-2">
+                                <input type="text" id="console-cmd-input" class="flex-1 px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white font-mono" placeholder="اكتب الأمر هنا بدون /" dir="ltr">
+                                <button type="submit" class="btn-brand px-6 py-2 rounded-lg text-black font-bold text-sm">إرسال</button>
+                            </form>
+                        </div>
+
+                        <div id="panel-tab-files" class="panel-tab-content hidden space-y-4">
+                            <div class="glass-card p-4 rounded-xl border border-brand-orange/20 mb-4 bg-brand-orange/5">
+                                <h4 class="font-bold text-brand-gold mb-1"><i class="fa-solid fa-circle-info ml-1"></i> كيف يمكنك رفع موقعك أو عوالمك؟</h4>
+                                <p class="text-xs text-zinc-300 leading-relaxed">
+                                    لرفع عوالم ماين كرافت مسبقة الصنع أو ملفات المواقع، يمكنك النقر على زر **"رفع ملف"** بالأسفل، أو الاتصال الآمن بالسيرفر عبر بروتوكول **SFTP** باستخدام بياناتك الخاصة الموجودة بالإعدادات. لرفع موقع ويب بالكامل، ارفع ملفاتك إلى السيرفر وقم بتسمية ملف البداية بـ <span class="text-brand-orange font-mono font-bold">index.html</span>.
+                                </p>
+                            </div>
+
+                            <div class="flex justify-between items-center bg-zinc-900/80 px-4 py-3 rounded-t-xl border-b border-zinc-800 text-xs text-zinc-400">
+                                <span>الاسم</span>
+                                <div class="flex gap-10">
+                                    <span>الحجم</span>
+                                    <span>تعديل</span>
+                                </div>
+                            </div>
+                            <div class="bg-zinc-900/30 rounded-b-xl border border-t-0 border-zinc-800 divide-y divide-zinc-800 text-sm">
+                                <div class="flex justify-between items-center p-4 hover:bg-zinc-800/30 transition">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-folder text-brand-gold"></i>
+                                        <span>world</span>
+                                    </div>
+                                    <span class="text-xs text-zinc-500">مجلد</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 hover:bg-zinc-800/30 transition">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-folder text-brand-gold"></i>
+                                        <span>plugins</span>
+                                    </div>
+                                    <span class="text-xs text-zinc-500">مجلد</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 hover:bg-zinc-800/30 transition">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-file-code text-zinc-400"></i>
+                                        <span class="font-mono">server.properties</span>
+                                    </div>
+                                    <span class="text-xs text-zinc-500 font-mono">14 KB</span>
+                                </div>
+                                <div class="flex justify-between items-center p-4 hover:bg-zinc-800/30 transition">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-file-code text-zinc-400"></i>
+                                        <span class="font-mono">index.html</span>
+                                    </div>
+                                    <span class="text-xs text-zinc-500 font-mono">245 KB</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="triggerFileUpload()" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-bold transition flex items-center gap-2">
+                                    <i class="fa-solid fa-cloud-arrow-up text-brand-orange"></i> رفع ملف جديد
+                                </button>
+                                <input type="file" id="dashboard-file-upload-input" class="hidden" onchange="mockFileUploaded()">
+                                <button onclick="showMessage('تم حفظ وإنشاء ملف جديد بنجاح!')" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-bold transition">إنشاء ملف فارغ</button>
+                            </div>
+                        </div>
+
+                        <div id="panel-tab-plugins" class="panel-tab-content hidden space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-bold">LuckPerms</h4>
+                                        <p class="text-xs text-zinc-500">إدارة الأذونات والرتب</p>
+                                    </div>
+                                    <button onclick="showMessage('تم تثبيت إضافة LuckPerms بنجاح!')" class="px-3 py-1.5 bg-brand-orange text-black font-bold text-xs rounded hover:scale-105 transition">تثبيت</button>
+                                </div>
+                                <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-bold">EssentialsX</h4>
+                                        <p class="text-xs text-zinc-500">حزمة الأوامر الأساسية</p>
+                                    </div>
+                                    <button onclick="showMessage('تم تثبيت إضافة EssentialsX بنجاح!')" class="px-3 py-1.5 bg-brand-orange text-black font-bold text-xs rounded hover:scale-105 transition">تثبيت</button>
+                                </div>
+                                <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-bold">WorldEdit</h4>
+                                        <p class="text-xs text-zinc-500">تعديل وبناء العوالم</p>
+                                    </div>
+                                    <button onclick="showMessage('تم تثبيت إضافة WorldEdit بنجاح!')" class="px-3 py-1.5 bg-brand-orange text-black font-bold text-xs rounded hover:scale-105 transition">تثبيت</button>
+                                </div>
+                                <div class="glass-card p-4 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-bold">Multiverse-Core</h4>
+                                        <p class="text-xs text-zinc-500">إنشاء وإدارة عوالم متعددة</p>
+                                    </div>
+                                    <button onclick="showMessage('تم تثبيت إضافة Multiverse-Core بنجاح!')" class="px-3 py-1.5 bg-brand-orange text-black font-bold text-xs rounded hover:scale-105 transition">تثبيت</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div id="view-order" class="page-view min-h-screen pt-24 pb-20 bg-brand-black">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="mb-8">
+                    <button onclick="switchView('view-home')" class="text-zinc-400 hover:text-brand-gold text-sm mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-right"></i> عودة للرئيسية
+                    </button>
+                    <h2 class="text-3xl font-bold">إتمام <span class="text-gradient">الطلب</span> والاشتراك</h2>
+                    <p class="text-zinc-400 mt-2">اختر الخطة وقم بضبط إعدادات السيرفر الجديد لبدء التجهيز الفوري.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">1. اختر الخطة المناسبة</h3>
+                            <select id="order-plan-select" onchange="updateOrderPrice()" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white">
+                                <option value="0" selected>الخطة المجانية - 2GB RAM ($0 للأبد)</option>
+                                <option value="8">الأساسية - 4GB RAM ($8 شهرياً)</option>
+                                <option value="11">المتوسطة - 6GB RAM ($11 شهرياً)</option>
+                                <option value="15">المتقدمة - 8GB RAM ($15 شهرياً)</option>
+                                <option value="22">الممتازة - 12GB RAM ($22 شهرياً)</option>
+                                <option value="28">الاحترافية - 16GB RAM ($28 شهرياً)</option>
+                                <option value="40">القصوى - 24GB RAM ($40 شهرياً)</option>
+                            </select>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">2. دورة الفوترة</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="billing" class="peer sr-only" checked>
+                                    <div class="p-4 border border-zinc-700 rounded-lg text-center peer-checked:border-brand-orange peer-checked:bg-brand-orange/10 transition">
+                                        <div class="font-bold text-lg">شهري (عادي)</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="billing" class="peer sr-only">
+                                    <div class="p-4 border border-zinc-700 rounded-lg text-center peer-checked:border-brand-orange peer-checked:bg-brand-orange/10 transition relative">
+                                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black text-xs font-bold px-2 py-1 rounded">خصم 15%</div>
+                                        <div class="font-bold text-lg">سنوي (توفير كبير)</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">3. اسم السيرفر</h3>
+                            <input type="text" id="order-server-name" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-brand-orange text-white" placeholder="مثال: My Awesome Server">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="glass-card p-6 rounded-xl sticky top-28">
+                            <h3 class="font-bold text-xl mb-4 border-b border-zinc-800 pb-3">ملخص الحساب</h3>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-zinc-400" id="summary-plan-name">سيرفر ماين كرافت (المجاني)</span>
+                                    <span id="summary-base-price">$0.00</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-zinc-400">تجهيز آلي وسيرفر نشط</span>
+                                    <span class="text-green-400">مجاناً</span>
+                                </div>
+                            </div>
+                            <div class="border-t border-zinc-800 pt-4 mb-6">
+                                <div class="flex justify-between font-bold text-lg">
+                                    <span>المجموع المستحق دفعاً</span>
+                                    <span class="text-brand-gold" id="summary-total-price">$0.00</span>
+                                </div>
+                            </div>
+                            <button onclick="processOrderCheckout()" class="w-full py-3 rounded-lg btn-brand text-black font-bold text-lg">
+                                تأكيد وبدء التفعيل
+                            </button>
+                            <p class="text-xs text-zinc-500 text-center mt-3">بالضغط على الزر، فإنك توافق التزاماً بشروط وسياسة الخصوصية الخاصة بنا.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-tickets" class="page-view min-h-screen pt-24 pb-20 bg-brand-black">
+            <div class="max-w-5xl mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <button onclick="switchView('view-dashboard')" class="text-zinc-400 hover:text-brand-gold text-sm mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right"></i> عودة للوحة التحكم
+                        </button>
+                        <h2 class="text-3xl font-bold">تذاكر <span class="text-gradient">الدعم الفني</span></h2>
+                    </div>
+                    <button onclick="showMessage('فتح تذكرة جديدة... قم بكتابة تفاصيل مشكلتك وسيجيب الدعم فوراً')" class="px-5 py-2 btn-brand rounded-lg text-black font-bold">
+                        <i class="fa-solid fa-plus ml-2"></i> تذكرة جديدة
+                    </button>
+                </div>
+                
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <table class="w-full text-right text-sm">
+                        <thead class="bg-zinc-900/80 text-zinc-400">
+                            <tr>
+                                <th class="px-6 py-4 font-medium">رقم التذكرة</th>
+                                <th class="px-6 py-4 font-medium">الموضوع</th>
+                                <th class="px-6 py-4 font-medium">الحالة</th>
+                                <th class="px-6 py-4 font-medium">آخر تحديث</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800">
+                            <tr class="hover:bg-zinc-800/30 transition cursor-pointer">
+                                <td class="px-6 py-4 font-mono">#1042</td>
+                                <td class="px-6 py-4 font-medium text-white">مشكلة في تركيب مود Fabric</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-900/50 text-green-400 rounded text-xs border border-green-800">تمت الإجابة</span></td>
+                                <td class="px-6 py-4 text-zinc-400">منذ ساعتين</td>
+                            </tr>
+                            <tr class="hover:bg-zinc-800/30 transition cursor-pointer">
+                                <td class="px-6 py-4 font-mono">#0891</td>
+                                <td class="px-6 py-4 font-medium text-white">استفسار بخصوص طريقة الترقية من 2G إلى 8G</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-zinc-800 text-zinc-300 rounded text-xs border border-zinc-700">مغلقة</span></td>
+                                <td class="px-6 py-4 text-zinc-400">منذ 3 أيام</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-kb" class="page-view min-h-screen pt-24 pb-20 bg-brand-black">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">قاعدة <span class="text-gradient">المعرفة والشروحات</span></h2>
+                    <p class="text-zinc-400 mb-8">تعلم كيف تدير استضافتك، ترفع عوالمك وموقعك الخاص، وتستلم أموالك ومبيعاتك!</p>
+                    <div class="relative max-w-xl mx-auto">
+                        <input type="text" placeholder="ابحث عن شروحات..." class="w-full px-6 py-4 pl-12 bg-zinc-900 border border-zinc-700 rounded-full focus:outline-none focus:border-brand-orange text-white text-lg">
+                        <i class="fa-solid fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-zinc-400 text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="glass-card p-6 rounded-xl hover:border-brand-gold transition duration-300">
+                        <i class="fa-solid fa-cloud-arrow-up text-brand-gold text-2xl mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2 text-white">كيفية رفع موقع إلكتروني واستضافته</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            خطوات مبسطة وسهلة لرفع موقع الويب الخاص بك على خادمنا:
+                        </p>
+                        <ul class="text-xs text-zinc-400 space-y-2 list-disc list-inside">
+                            <li>ادخل إلى **لوحة التحكم السحابية** الخاصة بنا.</li>
+                            <li>انتقل إلى علامة تبويب **مدير الملفات (Files)**.</li>
+                            <li>تأكد من تسمية الملف البرمجي الأساسي للموقع باسم <span class="text-brand-orange font-mono">index.html</span>.</li>
+                            <li>انقر على زر **رفع ملف** ثم اختر ملفات موقعك لرفعها فوراً.</li>
+                            <li>يمكنك أيضاً الاتصال الآمن بالسيرفر عبر **SFTP** لمزامنة كميات كبيرة من الملفات دفعة واحدة باستخدام FileZilla.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl hover:border-brand-gold transition duration-300">
+                        <i class="fa-solid fa-wallet text-brand-gold text-2xl mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2 text-white">كيفية استقبال واستلام الأموال المحولة</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                            إذا كنت تبيع رتب السيرفر أو خدمات الاستضافة وتريد معرفة كيفية سحب واستلام الأموال:
+                        </p>
+                        <ul class="text-xs text-zinc-400 space-y-2 list-disc list-inside">
+                            <li>**بوابات الدفع التلقائي**: يمكنك ربط متجر السيرفر بـ PayPal أو Stripe.</li>
+                            <li>**المحافظ الرقمية المحلية**: يمكنك استقبال التحويلات المباشرة مثل فودافون كاش، STC Pay.</li>
+                            <li>**بوابات مجمعة (Paymob/Moyasar)**: تتيح للمستخدمين العرب الدفع بواسطة بطاقات "مدى".</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl hover:cursor-pointer">
+                        <i class="fa-solid fa-book-open text-brand-gold text-2xl mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2 text-white">كيفية تغيير إصدار السيرفر</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">تغيير إصدار تشغيل السيرفر من النسخ القديمة إلى أحدث إصدارات ماين كرافت 1.20+ بضغطة واحدة وبدون فقدان عوالمك.</p>
+                    </div>
+                    
+                    <div class="glass-card p-6 rounded-xl hover:cursor-pointer">
+                        <i class="fa-solid fa-database text-brand-gold text-2xl mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2 text-white">ربط قواعد بيانات MySQL</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">شرح تفصيلي لتجهيز قواعد البيانات وربطها مع إضافات السيرفر مثل LuckPerms لتسريع الأداء وحفظ البيانات.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-tos" class="page-view min-h-screen pt-24 pb-20 bg-brand-black">
+            <div class="max-w-4xl mx-auto px-4 glass-card p-8 rounded-2xl">
+                <h2 class="text-3xl font-bold mb-6 text-gradient">شروط وأحكام الخدمة (Terms of Service)</h2>
+                <div class="prose prose-invert max-w-none text-zinc-300 space-y-4">
+                    <p>آخر تحديث: 2026</p>
+                    <h3 class="text-xl font-bold text-white mt-6">1. قبول الشروط والاشتراك</h3>
+                    <p>باستخدامك لخدمات الاستضافة المجانية أو المدفوعة من arbHostingCraft، فإنك توافق على الالتزام الكامل بهذه الشروط والسياسات المعلنة.</p>
+                    
+                    <h3 class="text-xl font-bold text-white mt-6">2. شروط الاستخدام المقبول</h3>
+                    <p>يُمنع استخدام سيرفرات الاستضافة أو النطاقات في أعمال هجومية أو تثبيت برمجيات اختراق أو تعدين العملات المشفرة. سيتم إغلاق السيرفر المخالف فوراً بدون أي تعويض.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-privacy" class="page-view min-h-screen pt-24 pb-20 bg-brand-black">
+            <div class="max-w-4xl mx-auto px-4 glass-card p-8 rounded-2xl">
+                <h2 class="text-3xl font-bold mb-6 text-gradient">سياسة الخصوصية (Privacy Policy)</h2>
+                <div class="prose prose-invert max-w-none text-zinc-300 space-y-4">
+                    <h3 class="text-xl font-bold text-white mt-6">1. جمع واستخدام البيانات الشخصية</h3>
+                    <p>نقوم بجمع الحد الأدنى من البيانات كبريد الإلكتروني والاسم لتسجيل الحساب وإدارة خوادمك وأمان الاتصال وحمايتها.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-[#050505] border-t border-zinc-900 pt-16 pb-8 z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center cursor-pointer mb-4" onclick="switchView('view-home')">
+                        <svg viewBox="0 0 100 100" class="w-8 h-8 ml-2">
+                            <path d="M50 5 L90 20 L90 50 C90 75 50 95 50 95 C50 95 10 75 10 50 L10 20 Z" fill="none" stroke="#FFD700" stroke-width="6"/>
+                            <path d="M50 15 L80 27 L80 50 C80 68 50 83 50 83 C50 83 20 68 20 50 L20 27 Z" fill="#F97316"/>
+                        </svg>
+                        <span class="font-bold text-xl">arb<span class="text-brand-orange">Hosting</span>Craft</span>
+                    </div>
+                    <p class="text-zinc-500 text-sm leading-relaxed mb-6">الخيار الأمثل لاستضافة سيرفرات ماين كرافت والويب في الشرق الأوسط.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="https://t.me/arbHostingCraft" target="_blank" class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-brand-orange transition">
+                            <i class="fa-brands fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-brand-orange transition">
+                            <i class="fa-brands fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">الخدمات</h4>
+                    <ul class="space-y-2 text-sm text-zinc-500">
+                        <li><a href="#" onclick="switchView('view-home'); setTimeout(()=>document.getElementById('plans').scrollIntoView(), 100);" class="hover:text-brand-gold transition">استضافة ماين كرافت</a></li>
+                        <li><a href="#" onclick="switchView('view-kb')" class="hover:text-brand-gold transition">استضافة خوادم الويب</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">روابط هامة</h4>
+                    <ul class="space-y-2 text-sm text-zinc-500">
+                        <li><a href="#" onclick="switchView('view-kb')" class="hover:text-brand-gold transition">قاعدة المعرفة</a></li>
+                        <li><a href="#" onclick="switchView('view-tos')" class="hover:text-brand-gold transition">شروط الخدمة</a></li>
+                        <li><a href="#" onclick="switchView('view-privacy')" class="hover:text-brand-gold transition">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">تواصل معنا</h4>
+                    <ul class="space-y-2 text-sm text-zinc-500">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-brand-orange"></i> support@arbhostingcraft.com</li>
+                        <li class="flex items-center gap-2"><i class="fa-brands fa-telegram text-brand-orange"></i> @arbHostingCraft</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-900 pt-8 text-center text-zinc-600 text-sm flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2026 arbHostingCraft. جميع الحقوق محفوظة.</p>
+                <div class="mt-4 md:mt-0 flex gap-2 text-2xl text-zinc-700">
+                    <i class="fa-brands fa-cc-visa hover:text-white transition cursor-pointer"></i>
+                    <i class="fa-brands fa-cc-mastercard hover:text-white transition cursor-pointer"></i>
+                    <i class="fa-brands fa-cc-paypal hover:text-white transition cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Telegram CTA -->
+    <a href="https://t.me/arbHostingCraft" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-[#229ED9] rounded-full flex items-center justify-center text-white text-3xl shadow-[0_0_20px_rgba(34,158,217,0.5)] hover:scale-110 transition-transform z-50 animate-bounce">
+        <i class="fa-brands fa-telegram"></i>
+    </a>
+
+    <!-- Custom Alert Box -->
+    <div id="custom-alert" class="fixed top-24 left-1/2 transform -translate-x-1/2 bg-brand-orange text-black font-bold px-6 py-3 rounded-lg shadow-lg z-[100] opacity-0 pointer-events-none transition-opacity duration-300 text-sm">
+        رسالة تنبيه
+    </div>
+
+    <!-- ========== ربط ملف JavaScript ========== -->
+    <script src="js/main.js"></script>
+</body>
+</html>
